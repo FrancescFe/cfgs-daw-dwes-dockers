@@ -1,0 +1,20 @@
+PRUEBAS DEL SETUP DEL AULA
+
+1. Guarda copia de django-app/config/urls.py y wsgi.py si los has modificado desde el ZIP original.
+2. Copia las cuatro carpetas de este paquete dentro de 2DAWdockers, combinando carpetas y sustituyendo los archivos indicados.
+   urls.py conserva las rutas del ZIP original (inicio, db, admin y paridad) y añade prueba-django/.
+   wsgi.py incorpora una ruta WSGI pura y deriva las demás peticiones a Django.
+3. Desde la carpeta que contiene docker-compose.yml ejecuta:
+   docker compose exec --user root cgi sh -c 'chmod 755 /app/cgi-bin/prueba_mako.py'
+   docker compose restart django
+4. Abre:
+   http://localhost:8080/cgi-bin/prueba_mako.py?nombre=Ana
+   http://localhost:8001/prueba-django/?nombre=Ana
+   http://localhost:8001/prueba-wsgi/?nombre=Ana
+   http://localhost:8083/prueba_saludo.jsp
+
+No hay que cambiar puertos, reconstruir imágenes ni volver a exportar el TAR.
+WSGI puro comparte el proceso Gunicorn de Django: no añade contenedores.
+Estas pruebas no verifican MySQL. Para comprobarlo usa http://localhost:8001/db/
+Los Python CGI del paquete están guardados con finales LF.
+Integra los archivos en la copia de distribución ANTES de volver a comprimirla.

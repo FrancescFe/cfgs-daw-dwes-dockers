@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de ejemplo</title>
+</head>
+<body>
+
+<h1>Formulario de entrada de datos</h1>
+
+<form action="/cgi-bin/programa.py"
+      method="get"
+      accept-charset="UTF-8">
+
+    <!-- TEXTO -->
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre">
+    <br><br>
+
+    <!-- NÚMERO -->
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" name="edad"
+           min="0" max="120" step="1">
+    <br><br>
+
+    <!-- CONTRASEÑA -->
+    <label for="clave">Contraseña:</label>
+    <input type="password" id="clave" name="clave">
+    <br><br>
+
+    <!-- CORREO ELECTRÓNICO -->
+    <label for="correo">Correo:</label>
+    <input type="email" id="correo" name="correo">
+    <br><br>
+
+    <!-- TELÉFONO -->
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono">
+    <br><br>
+
+    <!-- URL -->
+    <label for="web">Página web:</label>
+    <input type="url" id="web" name="web">
+    <br><br>
+
+    <!-- BÚSQUEDA -->
+    <label for="busqueda">Buscar:</label>
+    <input type="search" id="busqueda" name="busqueda">
+    <br><br>
+
+    <!-- FECHA -->
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha">
+    <br><br>
+
+    <!-- HORA -->
+    <label for="hora">Hora:</label>
+    <input type="time" id="hora" name="hora">
+    <br><br>
+
+    <!-- FECHA Y HORA -->
+    <label for="cita">Fecha y hora:</label>
+    <input type="datetime-local" id="cita" name="cita">
+    <br><br>
+
+    <!-- MES -->
+    <label for="mes">Mes:</label>
+    <input type="month" id="mes" name="mes">
+    <br><br>
+
+    <!-- SEMANA -->
+    <label for="semana">Semana:</label>
+    <input type="week" id="semana" name="semana">
+    <br><br>
+
+    <!-- COLOR -->
+    <label for="color">Color:</label>
+    <input type="color" id="color" name="color">
+    <br><br>
+
+    <!-- RANGO DESLIZANTE -->
+    <label for="nivel">Nivel:</label>
+    <input type="range" id="nivel" name="nivel"
+           min="0" max="100" step="5">
+    <br><br>
+
+    <!-- CASILLA DE VERIFICACIÓN -->
+    <input type="checkbox" id="disponible"
+           name="disponible" value="si">
+    <label for="disponible">Solo disponibles</label>
+    <br><br>
+
+    <!-- BOTONES DE OPCIÓN -->
+    <p>Forma de pago:</p>
+
+    <input type="radio" id="tarjeta"
+           name="pago" value="tarjeta">
+    <label for="tarjeta">Tarjeta</label>
+
+    <input type="radio" id="efectivo"
+           name="pago" value="efectivo">
+    <label for="efectivo">Efectivo</label>
+    <br><br>
+
+    <!-- LISTA DESPLEGABLE -->
+    <label for="provincia">Provincia:</label>
+    <select id="provincia" name="provincia">
+        <option value="valencia">Valencia</option>
+        <option value="alicante">Alicante</option>
+        <option value="castellon">Castellón</option>
+    </select>
+    <br><br>
+
+    <!-- TEXTO MULTILÍNEA -->
+    <label for="observaciones">Observaciones:</label>
+    <textarea id="observaciones"
+              name="observaciones"
+              rows="4" cols="40"></textarea>
+    <br><br>
+
+    <!-- ARCHIVO -->
+    <label for="archivo">Seleccionar archivo:</label>
+    <input type="file" id="archivo" name="archivo">
+    <br><br>
+
+    <!-- CAMPO OCULTO -->
+    <input type="hidden" name="codigo" value="1234">
+
+    <!-- BOTONES -->
+    <input type="submit" value="Enviar formulario">
+    <input type="reset" value="Limpiar formulario">
+    <input type="button" value="Botón genérico">
+
+</form>
+
+</body>
+</html>

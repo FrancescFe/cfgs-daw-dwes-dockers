@@ -1,0 +1,95 @@
+name: daw2
+
+services:
+    nginx:
+        image: nginx:alpine
+        ports:
+            - "8080:80"
+        depends_on:
+            - cgi
+        volumes:
+            - ./src:/var/www/html:ro
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+        restart: unless-stopped
+
+    mysql:
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: administrador
+            MYSQL_DATABASE: test
+            MYSQL_USER: alumno
+            MYSQL_PASSWORD: alumno
+        ports:
+            - "3366:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+            - ./docker/scripts:/scripts
+            - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
+        tmpfs:
+            - /tmp
+
+    cgi:
+        build:
+            context: .
+            dockerfile: docker/cgi/Dockerfile
+        volumes:
+            - ./cgi-bin:/app/cgi-bin
+            - ./templatesMako:/app/templatesMako
+        expose:
+            - "9000"
+        restart: unless-stopped
+
+    tomcat:
+        image: tomcat:10.1-jdk21
+        ports:
+            - "8083:8080"
+        volumes:
+            - ./jsp-app:/usr/local/tomcat/webapps/ROOT
+        restart: unless-stopped
+
+    django:
+        build:
+            context: ./django-app
+            dockerfile: Dockerfile
+        working_dir: /app
+        command:
+            - gunicorn
+            - config.wsgi:application
+            - --bind
+            - 0.0.0.0:8000
+        environment:
+            DJANGO_SECRET_KEY: clave-desarrollo-cambiar-en-produccion
+            DJANGO_DEBUG: "True"
+            DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+            DB_HOST: mysql
+            DB_PORT: "3306"
+            DB_NAME: test
+            DB_USER: alumno
+            DB_PASSWORD: alumno
+        ports:
+            - "8001:8000"
+        volumes:
+            - ./django-app:/app
+        depends_on:
+            - mysql
+        restart: unless-stopped
+
+    wsgi:
+        build:
+            context: ./django-app
+            dockerfile: Dockerfile
+        working_dir: /app
+        command:
+            - gunicorn
+            - --bind
+            - 0.0.0.0:8000
+            - --reload
+            - enrutador:application
+        ports:
+            - "8002:8000"
+        volumes:
+            - ./wsgi-app:/app
+        restart: unless-stopped
+
+volumes:
+    dbdata:
