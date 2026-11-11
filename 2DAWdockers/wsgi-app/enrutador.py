@@ -1,10 +1,12 @@
 
 #from calculadora import contenido as contenido_calculadora
 
+from carteles_objetos_perdidos import contenido as contenido_carteles
+
 def application(environ, start_response):
     # Rutas disponibles: añadir una entrada por cada ejercicio.
     rutas = {
-
+        "/carteles": contenido_carteles,
    # "/calculadora": contenido_calculadora
 }
     ruta: str = environ.get("PATH_INFO", "/")

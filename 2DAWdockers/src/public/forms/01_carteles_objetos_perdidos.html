@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de objetos encontrados</title>
+</head>
+<body>
+    <h1>Crear cartel de objeto encontrado</h1>
+
+    <form action="http://localhost:8002/carteles"
+          method="get"
+          accept-charset="UTF-8">
+
+        <p>
+            <label for="objeto">Nombre del objeto:</label>
+            <input type="text" id="objeto" name="objeto" required>
+        </p>
+
+        <p>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion"
+                      name="descripcion"
+                      rows="4"
+                      cols="40"
+                      required></textarea>
+        </p>
+
+        <p>
+            <label for="lugar">Lugar donde se encontró:</label>
+            <input type="text" id="lugar" name="lugar" required>
+        </p>
+
+        <p>
+            <label for="correo">Correo de contacto:</label>
+            <input type="email" id="correo" name="correo" required>
+        </p>
+
+        <p>
+            <label for="tipo_aviso">Tipo de aviso:</label>
+            <select id="tipo_aviso" name="tipo_aviso" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="discreto">Discreto</option>
+                <option value="destacado">Destacado</option>
+            </select>
+        </p>
+
+        <button type="submit">Generar cartel</button>
+    </form>
+</body>
+</html>
